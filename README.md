@@ -1,0 +1,1 @@
+Me chamo Mateus, sou estudante do curso de Ciências da Computação da São Paulo Tech School. Este é um projeto desenvolvido de forma individual, para demonstração de aprendizado dos conteúdos ministrados neste semestre.
