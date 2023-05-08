@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Swash&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+body{
+    background-image: url(../img/background.png);
+    background-size: cover;
+    margin: 0;
+}
+
+header{
+    margin: 0;
+    width: 100%;
+    background-color: rgba(000, 000, 000, 0.3);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.header{
+    margin: auto;
+    width: 90%;
+    height: 50px;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid gray;
+}
+
+code{
+    color: #607B96;
+    font-family: 'Cherry Swash', cursive;
+    font-size: 20px;
+    margin: 0;
+}
+
+.menu{
+    width: 50%;
+}
+
+.menu ul{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Cherry Swash', cursive;
+    color: #ffffff;
+    width: 100%;
+    margin: 0;
+}
+
+.menu ul li{
+    list-style: none;
+}
+
+.menu ul li:nth-of-type(2), .menu ul li:nth-of-type(3), .menu ul li:nth-of-type(4), .menu ul li:nth-of-type(5){
+    color: rgba(255, 255, 255, 0.5);
+}
