@@ -323,3 +323,113 @@ code a{
     color: rgba(255, 255, 255, 1);
 }
 /* FIM DO LOGIN */
+
+/* INÍCIO OS FILMES */
+.contentFilmes{
+    margin: auto;
+    width: 90%;
+    margin-top: 30px;
+}
+
+.tituloFilme{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.tituloFilme img{
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    box-shadow: 2px -1px 3px rgba(255, 255, 255, 1);
+}
+
+.tituloFilme h2{
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+.descFilme{
+    background-color: #011221;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.descFilme p{
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Cherry Swash', cursive;
+    font-size: 17px;
+}
+
+.linksFilme{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.linksFilme a button{
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 20px;
+    height: 40px;
+    width: 120px;
+    font-family: 'Cherry Swash', cursive;
+    padding: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.linksFilme p{
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+}
+/* FIM DE OS FILMES */
+
+
+
+
+
+/* INÍCIO FOOTER */
+footer{
+    background-color: #0E1C2C;
+    margin: 0;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.tituloFooter h1{
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+    font-weight: 550;
+}
+
+.contatos ul{
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+.contatos ul li a{
+    padding-left: 10px;
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+    text-decoration: none;
+}
+
+.developBy{
+    padding-right: 50px;
+    align-self: end;
+    font-family: 'Cherry Swash', cursive;
+    color: rgba(255, 255, 255, 0.4);
+}
+/* FIM DO FOOTER */
