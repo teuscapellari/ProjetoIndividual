@@ -328,13 +328,17 @@ code a{
 .contentFilmes{
     margin: auto;
     width: 90%;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .tituloFilme{
     width: 100%;
     display: flex;
     align-items: center;
+}
+
+#filme02, #filme04, #filme06, #filme08{
+    flex-direction: row-reverse;
 }
 
 .tituloFilme img{
@@ -351,12 +355,18 @@ code a{
     margin-left: 20px;
 }
 
+#filme02 h2, #filme04 h2, #filme06 h2, #filme08 h2{
+    margin-left: 0;
+    margin-right: 20px;
+}
+
 .descFilme{
     background-color: #011221;
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin-top: 20px;
     border-radius: 20px;
     padding: 10px;
+    height: 250px;
 }
 
 .descFilme p{
@@ -388,6 +398,11 @@ code a{
 .linksFilme p{
     font-size: 14px;
     color: rgba(255, 255, 255, 0.4);
+}
+
+hr{
+    width: 90%;
+    margin-top: 50px;
 }
 /* FIM DE OS FILMES */
 
