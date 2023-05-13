@@ -4,6 +4,7 @@
 
 body{
     background-image: url(../img/background.png);
+    background-attachment: fixed;
     background-size: cover;
     margin: 0;
 }
@@ -367,6 +368,9 @@ code a{
     border-radius: 20px;
     padding: 10px;
     height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .descFilme p{
@@ -395,6 +399,13 @@ code a{
     text-decoration: none;
 }
 
+.linksFilme a button:hover{
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
+    transition: transform 1s;
+    transform: translateX(0) scale(1.1);
+}
+
 .linksFilme p{
     font-size: 14px;
     color: rgba(255, 255, 255, 0.4);
@@ -403,6 +414,7 @@ code a{
 hr{
     width: 90%;
     margin-top: 50px;
+    border-color: rgba(255, 255, 255, 0.7);
 }
 /* FIM DE OS FILMES */
 
@@ -439,6 +451,10 @@ footer{
     color: rgba(255, 255, 255, 1);
     font-family: 'Cherry Swash', cursive;
     text-decoration: none;
+}
+
+.contatos ul li a:hover{
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .developBy{
