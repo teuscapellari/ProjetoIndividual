@@ -418,6 +418,47 @@ hr{
 }
 /* FIM DE OS FILMES */
 
+/* INÍCIO PERSONAGENS FAVORITOS */
+.mainPersonagensFav{
+    height: 90vh;
+    width: 100%;
+}
+
+.personagens{
+    width: 80%;
+    margin: auto;
+}
+
+.personagem01, .personagem02, .personagem03, .personagem04, .personagem05{
+    display: flex;
+    margin-top: 40px;
+}
+
+.personagem02, .personagem04{
+    flex-direction: row-reverse;
+}
+
+.img img{
+    width: 150px;
+}
+
+.descPersonagem{
+    color: #FFFFFF;
+    font-family: 'Cherry Swash', cursive;
+    margin-left: 20px;
+}
+
+.descPersonagem h2{
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.descPersonagem p{
+    font-size: 18px;
+}
+
+
+
+/* FIM DE INÍCIO PERSONAGENS FAVORITOS */
 
 
 
