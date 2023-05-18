@@ -420,7 +420,7 @@ hr{
 
 /* INÍCIO PERSONAGENS FAVORITOS */
 .mainPersonagensFav{
-    height: 90vh;
+    
     width: 100%;
 }
 
@@ -432,12 +432,17 @@ hr{
 .personagem01, .personagem02, .personagem03, .personagem04, .personagem05{
     display: flex;
     margin-top: 40px;
+    align-items: center;
+    text-align: justify;
 }
 
 .personagem02, .personagem04{
     flex-direction: row-reverse;
 }
 
+.personagem02 h2, .personagem04 h2{
+    text-align: right;
+}
 .img img{
     width: 150px;
 }
@@ -446,6 +451,10 @@ hr{
     color: #FFFFFF;
     font-family: 'Cherry Swash', cursive;
     margin-left: 20px;
+}
+
+.descPersonagem:nth-of-type(2), .descPersonagem:nth-of-type(4){
+    margin-right: 20px;
 }
 
 .descPersonagem h2{
