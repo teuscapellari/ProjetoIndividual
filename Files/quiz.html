@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Harry Potter</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header">
+            <div class="logo">
+                <code><a href="index.html"> < Mateus Capellari /> </a></code>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html" id="inicial">_Inicial</a></li>
+                    <li><a href="osFilmes.html" id="osFilmes">_Os filmes</a></li>
+                    <li><a href="personagensFav.html" id="personagensfav">_Personagens favoritos</a></li>
+                    <li><a href="sobreMim.html" id="sobreMim">_Sobre mim</a></li>
+                    <li><a href="#contatoFooter" id="contato">_Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="mainQuiz">
+        <h1>N.O.M.S.</h1>
+
+        <div class="formQuiz">
+            <div class="partQuiz" id="partQuiz">
+                <label for="" id="pergunta">pergunta</label>
+                
+                <label for="" id="alternativa01">alternativa01</label>
+
+                <label for="" id="alternativa02">alternativa02</label>
+
+                <label for="" id="alternativa03">alternativa03</label>
+
+                <label for="" id="alternativa04">alternativa04</label>
+
+                <input type="number" placeholder="Resposta: 1, 2, 3 ou 4" id="resposta">
+
+                <button onclick="nextQuest()" class="btnProx">Próxima Pergunta</button>
+            </div>
+
+        </div>
+    </main>
+    
+</body>
+</html>
+
+<script>
+
+    var perguntas = ['1. Quando Harry nasceu?',
+                        '2. Quais são as 3 maldições imperdoáveis?',
+                        '3. Onde Hary Potter nasceu?',
+                        '4. Qual é o único bruxo que voldemort sempre temeu?',
+                        '5. Quem matou Dumbledore?',
+                        '6. Qual é o nome do filho mais velho de Harry Potter e Ginna Weasley?',
+                        '7. Como Hermione assistia a todas as aulas?',
+                        '8. Qual destes feitiços foi criado por Severus Snape?',
+                        '9. Qual é o trio de prata?',
+                        '10. Qual é a planta que os alunos de Hogwarts conhecem no 2 ano, na aula de herbologia?']
+
+    var alternativas = {
+        alternativa01: ['1. 31/07/1980', '1. Expectro Patronum, Cruciatus e Avada Kedavra', '1. Wiltshire (Inglaterra)', '1. Minerva', '1. Voldemort', '1. Alvo Severo', '1. Com o Aresto Momentum', '1. Reducto', '1. Draco, Crabbe e Goile', '1. Visgo do Diabo'],
+        alternativa02: ['2. 31/08/1980', '2. Imperius, Lumos e Avada Kedavra', '2. Bracknell (Inglaterra)', '2. Dumbledore', '2. Draco', '2 .Tiago Sirius', '2. Com um vira-tempo', '2. Expelliarmus', '2. Harry, Hermione e Rony', '2. Mandrangora'],
+        alternativa03: ['3. 31/07/1981', '3. Imperius, Cruciatus e Avada Kedavra', '3. Godric’s Hollow (Escócia)', '3. Snape', '3. Bellatrix', '3. Lily Luna', '3. Ela não assistia todas as aulas', '3. Sectumsempra', '3. Gina, Neville e Luna', '3. Mandrágora'],
+        alternativa04: ['4. 30/07/1980', '4. Revelio, Lumos e Expectro Patronum', '4. Hogsmeade', '4. Bellatrix', '4. Snape', '4. James Dumbledore', '4. Tinha aulas particulares', '4. Incendio', '4. Cho, Cedrigo e Draco', '4.Testrálio']
+    }
+
+    var numPergunta = 0;    
+
+    pergunta.innerHTML = perguntas[numPergunta];
+    alternativa01.innerHTML = alternativas.alternativa01[numPergunta];
+    alternativa02.innerHTML = alternativas.alternativa02[numPergunta];
+    alternativa03.innerHTML = alternativas.alternativa03[numPergunta];
+    alternativa04.innerHTML = alternativas.alternativa04[numPergunta];
+
+    var respostaUser = [];
+    // CRIAR UMA VARIAVEL PARA RECEBER O INPUT E DEPOIS DAR O .PUSH
+
+    function nextQuest(){
+
+        if(numPergunta < 10){
+            numPergunta++;
+            pergunta.innerHTML = perguntas[numPergunta];
+            alternativa01.innerHTML = alternativas.alternativa01[numPergunta];
+            alternativa02.innerHTML = alternativas.alternativa02[numPergunta];
+            alternativa03.innerHTML = alternativas.alternativa03[numPergunta];
+            alternativa04.innerHTML = alternativas.alternativa04[numPergunta];
+        }
+        
+        if(numPergunta == 10){
+            partQuiz.style.display = 'none';
+        }
+    }
+
+</script>

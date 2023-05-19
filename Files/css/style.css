@@ -61,7 +61,7 @@ code a{
 
 .menu ul li a{
     text-decoration: none;
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .menu ul li:nth-of-type(2), .menu ul li:nth-of-type(3), .menu ul li:nth-of-type(4), .menu ul li:nth-of-type(5){
@@ -330,6 +330,8 @@ code a{
     margin: auto;
     width: 90%;
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
 }
 
 .tituloFilme{
@@ -416,6 +418,28 @@ hr{
     margin-top: 50px;
     border-color: rgba(255, 255, 255, 0.7);
 }
+
+.btnQuiz{
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 20px;
+    height: 50px;
+    width: 150px;
+    font-family: 'Cherry Swash', cursive;
+    padding: 5px;
+    cursor: pointer;
+    margin-top: 40px;
+    text-decoration: none;
+    align-self: center;
+}
+
+.btnQuiz:hover{
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
+    transition: transform 1s;
+    transform: translateX(0) scale(1.1);
+}
 /* FIM DE OS FILMES */
 
 /* INÍCIO PERSONAGENS FAVORITOS */
@@ -469,7 +493,148 @@ hr{
 
 /* FIM DE INÍCIO PERSONAGENS FAVORITOS */
 
+/* INÍCIO SOBRE MIM */
+.contentSobreMim{
+    margin: auto;
+    width: 70%;
+    margin-top: 50px;
+}
 
+.tituloSobreMim{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#filme02, #filme04, #filme06, #filme08{
+    flex-direction: row-reverse;
+}
+
+.tituloSobreMim img{
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    box-shadow: 2px -1px 3px rgba(255, 255, 255, 1);
+}
+
+.tituloSobreMim h2{
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+.descSobreMim{
+    background-color: #011221;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 10px;
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.descSobreMim p{
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+    font-size: 17px;
+}
+
+.desc01{
+    width: 45%;
+    padding-left: 20px;
+}
+
+.desc02{
+    width: 45%;
+}
+/* FIM DE SOBRE MIM */
+
+/* INÍCIO DO QUIZ */
+.mainQuiz{
+    height: 90vh;
+    width: 100%;
+}
+
+.mainQuiz h1{
+    color: #ffffff;
+    font-weight: 700;
+    font-family: 'Cherry Swash', cursive;
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formQuiz{
+    margin: auto;
+    width: 70%;
+    background-color: #011221;
+    height: 80%;
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    border: 0.1px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+}
+
+.partQuiz{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-left: 20px;
+}
+
+.partQuiz label{
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+    font-size: 20px;
+}
+
+.partQuiz label:nth-of-type(1){
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 30px;
+}
+
+
+.partQuiz input{
+    width: 40%;
+    background-color: rgb(255, 255, 255, 0.7);
+    height: 35px;
+    border-radius: 10px;
+    border-style: none;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+.btnProx{
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 20px;
+    height: 40px;
+    width: 140px;
+    font-family: 'Cherry Swash', cursive;
+    padding: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.btnProx:hover{
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
+    transition: transform 1s;
+    transform: translateX(0) scale(1.1);
+}
+/* FIM DO QUIZ */
 
 
 /* INÍCIO FOOTER */
