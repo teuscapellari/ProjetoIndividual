@@ -614,6 +614,31 @@ hr{
     margin-top: 20px;
 }
 
+#resultadoQuiz{
+    display: none;
+}
+
+#resultadoQuiz h1{
+    font-family: 'Cherry Swash', cursive;
+    color: #FFFFFF;
+}
+
+.formQuiz .btnTryAgain{
+    display: none;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 20px;
+    height: 40px;
+    width: 140px;
+    font-family: 'Cherry Swash', cursive;
+    padding: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    align-self: center;
+}
+
 .btnProx{
     background-color: transparent;
     border: 1px solid #ffffff;

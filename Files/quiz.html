@@ -29,7 +29,7 @@
     <main class="mainQuiz">
         <h1>N.O.M.S.</h1>
 
-        <div class="formQuiz">
+        <div class="formQuiz" id="idFormQuiz">
             <div class="partQuiz" id="partQuiz">
                 <label for="" id="pergunta">pergunta</label>
                 
@@ -46,6 +46,12 @@
                 <button onclick="nextQuest()" class="btnProx">Próxima Pergunta</button>
             </div>
 
+            <div class="resultadoQuiz" id="resultadoQuiz">
+            </div>
+            <button onclick="window.location.reload(false);" class="btnTryAgain" id="idBtnTryAgain">Tentar Novamente</button>
+
+            
+
         </div>
     </main>
     
@@ -53,6 +59,12 @@
 </html>
 
 <script>
+
+        inicial.style.color = "rgba(255, 255, 255, 0.5)";
+        osFilmes.style.color = "#ffffff";
+        personagensfav.style.color = "rgba(255, 255, 255, 0.5)";
+        sobreMim.style.color = "rgba(255, 255, 255, 0.5)";
+        contato.style.color = "rgba(255, 255, 255, 0.5)";
 
     var perguntas = ['1. Quando Harry nasceu?',
                         '2. Quais são as 3 maldições imperdoáveis?',
@@ -80,23 +92,61 @@
     alternativa03.innerHTML = alternativas.alternativa03[numPergunta];
     alternativa04.innerHTML = alternativas.alternativa04[numPergunta];
 
+    var respostasCertas = [1, 3, 3, 2, 4, 2, 2, 3, 3, 3];
+
     var respostaUser = [];
-    // CRIAR UMA VARIAVEL PARA RECEBER O INPUT E DEPOIS DAR O .PUSH
+
+    var acertos = 0;
+    
 
     function nextQuest(){
 
-        if(numPergunta < 10){
-            numPergunta++;
-            pergunta.innerHTML = perguntas[numPergunta];
-            alternativa01.innerHTML = alternativas.alternativa01[numPergunta];
-            alternativa02.innerHTML = alternativas.alternativa02[numPergunta];
-            alternativa03.innerHTML = alternativas.alternativa03[numPergunta];
-            alternativa04.innerHTML = alternativas.alternativa04[numPergunta];
-        }
+        var respostaVar = resposta.value;
+
+        if(respostaVar == 1 || respostaVar == 2 || respostaVar == 3 || respostaVar == 4){
+            if(numPergunta <= 9){
+                setTimeout(function(){
+                    
+                    numPergunta++;
+                    pergunta.innerHTML = perguntas[numPergunta];
+                    alternativa01.innerHTML = alternativas.alternativa01[numPergunta];
+                    alternativa02.innerHTML = alternativas.alternativa02[numPergunta];
+                    alternativa03.innerHTML = alternativas.alternativa03[numPergunta];
+                    alternativa04.innerHTML = alternativas.alternativa04[numPergunta];
+
+                    
+                },1000);
+                
+            }
         
-        if(numPergunta == 10){
-            partQuiz.style.display = 'none';
+            if(numPergunta == 9){
+                partQuiz.style.display = 'none';
+                resultadoQuiz.style.display = 'block';
+                idBtnTryAgain.style.display = 'block';
+
+                idFormQuiz.style.display = 'flex';
+                idFormQuiz.style.flexDirection = 'column';
+
+                for(var i = 0; i < respostasCertas.length; i++){
+                    if(respostaUser[i] == respostasCertas[i]){
+                        acertos++;
+                    }
+                }
+
+                
+            }
+
+            respostaUser.push(respostaVar);
         }
+        else{
+            alert("Insira uma resposta válida!")
+        }
+
+        resposta.value = ``;
+
+        resultadoQuiz.innerHTML = `<h1>Parabéns, você acertou ${acertos} questões!!!</h1>`;
+
     }
+
 
 </script>
