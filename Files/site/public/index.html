@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Projeto Individual Harry Potter</title>
+
+
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
 </head>
 <body>
+    <!-- <embed src="assets/harrypottermusic.mp3" autostart="true" loop="true"> -->
+    <!-- <audio src="assets/harrypottermusic.mp3" autoplay="true" loop="true" controls></audio> -->
 
     <header>
         <div class="header">
             <div class="logo">
-                <code><a href="index.html"> < Mateus Capellari /> </a></code>
+                <code><a href="index.html"> < Mateus Capellari /> </a> </code>
             </div>
             <div class="menu">
                 <ul>
@@ -26,23 +31,16 @@
         </div>
     </header>
 
-    <main class="mainCadastro">
-        <h1>Logar-se</h1>
-
-        <div class="formLogin">
-            <div class="partLogin">
-                <label for="">E-mail:</label>
-                <input type="email" placeholder="nome@email.com">
-
-                <label for="">Senha:</label>
-                <input type="password" placeholder="******">
-
-                <p>Ainda não tem cadastro? <a href="cadastro.html">Cadastre-se</a></p>
-
-                <div class="buttonsLog">
-                    <a href="osFilmes.html"><button>Logar</button></a>
-                    <p><a href="index.html">< Voltar</a></p>
-                </div>
+    <main class="mainHome">
+        <div class="contents">
+            <div class="content1">
+                <img src="img/titleHarry.png" alt="">
+                <p>Eu sou o que sou e eu não tenho vergonha</p>
+                <a href="cadastro.html"><button>Cadastre-se</button></a>
+                <a href="login.html">Login</a>
+            </div>
+            <div class="content2">
+                <img src="img/houses.png" alt="">
             </div>
         </div>
     </main>
@@ -52,7 +50,12 @@
 
 <script>
 
-    inicial.style.color = "#ffffff";
+sessionStorage.ID_USUARIO = 0;
+sessionStorage.NOME_USUARIO = '';
+sessionStorage.EMAIL_USUARIO = '';
+        
+
+        inicial.style.color = "#ffffff";
         osFilmes.style.color = "rgba(255, 255, 255, 0.5)";
         personagensfav.style.color = "rgba(255, 255, 255, 0.5)";
         sobreMim.style.color = "rgba(255, 255, 255, 0.5)";

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header">
+            <div class="logo">
+                <code><a href="index.html" id="idCode"> < Mateus Capellari /> </a></code>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html" id="inicial">_Inicial</a></li>
+                    <li><a id="osFilmes">_Os filmes</a></li>
+                    <li><a id="personagensfav">_Personagens favoritos</a></li>
+                    <li><a id="sobreMim">_Sobre mim</a></li>
+                    <li><a id="contato">_Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="mainCadastro">
+        <h1>Logar-se</h1>
+
+        <div class="formLogin">
+            <div class="partLogin">
+                <label for="">E-mail:</label>
+                <input type="email" placeholder="nome@email.com" id="iptEmail">
+
+                <label for="">Senha:</label>
+                <input type="password" placeholder="******" id="iptSenha">
+
+                <p>Ainda não tem cadastro? <a href="cadastro.html">Cadastre-se</a></p>
+
+                <div class="buttonsLog">
+                    <a href="osFilmes.html"><button onclick="entrar()">Logar</button></a>
+                    <p><a href="index.html">< Voltar</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+</body>
+</html>
+
+<script>
+
+    inicial.style.color = "#ffffff";
+        osFilmes.style.color = "rgba(255, 255, 255, 0.5)";
+        personagensfav.style.color = "rgba(255, 255, 255, 0.5)";
+        sobreMim.style.color = "rgba(255, 255, 255, 0.5)";
+        contato.style.color = "rgba(255, 255, 255, 0.5)";
+
+    function entrar(){
+        var emailVar = iptEmail.value;
+        var senhaVar = iptSenha.value;
+
+        // if (emailVar == "" || senhaVar == "") {
+        //     cardErro.style.display = "block"
+        //     mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        //     finalizarAguardar();
+        //     return false;
+        // }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    
+
+                    // setTimeout(function () {
+                    //     window.location = "./dashboard/cards.html";
+                    // }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>

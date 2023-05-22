@@ -12,7 +12,7 @@
     <header>
         <div class="header">
             <div class="logo">
-                <code><a href="index.html"> < Mateus Capellari /> </a></code>
+                <code><a href="index.html" id="idCode"> < Mateus Capellari /> </a></code>
             </div>
             <div class="menu">
                 <ul>
@@ -94,10 +94,16 @@
 
 <script>
 
+    if(sessionStorage.ID_USUARIO == 0){
+        window.location.href = "index.html"
+    }
+
         inicial.style.color = "rgba(255, 255, 255, 0.5)";
         osFilmes.style.color = "rgba(255, 255, 255, 0.5)";
         personagensfav.style.color = "rgba(255, 255, 255, 0.5)";
         sobreMim.style.color = "#ffffff";
         contato.style.color = "rgba(255, 255, 255, 0.5)";
+
+        idCode.innerHTML = `<code> < ${sessionStorage.NOME_USUARIO} /> </code>`;
 
 </script>
