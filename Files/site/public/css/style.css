@@ -7,6 +7,7 @@ body{
     background-attachment: fixed;
     background-size: cover;
     margin: 0;
+    cursor: url(../assets/varinha.png), default;
 }
 
 /* CABEÇALHO DO SITE */
@@ -334,6 +335,8 @@ code a{
     flex-direction: column;
 }
 
+
+
 .tituloFilme{
     width: 100%;
     display: flex;
@@ -498,7 +501,22 @@ hr{
     margin: auto;
     width: 70%;
     margin-top: 50px;
+    /* animation-duration: 5s;
+  animation-name: slidein; */
 }
+
+/* @keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 100%;
+  }
+
+  to {
+    margin-left: 30%;
+    width: 70%;
+  }
+} */
+
 
 .tituloSobreMim{
     width: 100%;

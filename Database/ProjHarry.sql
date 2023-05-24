@@ -11,6 +11,8 @@ CREATE TABLE Usuario(
     filmeFav VARCHAR(60)
 );
 
+SELECT * FROM Usuario;
+
 CREATE TABLE RespostaQuiz(
 	idRespostaQuiz INT PRIMARY KEY AUTO_INCREMENT,
     qtdAcertos VARCHAR(45),

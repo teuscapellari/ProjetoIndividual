@@ -103,6 +103,17 @@
     var respostaUser = [];
 
     var acertos = 0;
+
+    var dataResp;
+
+    var data;
+
+    var ano;
+    var mes;
+    var dia;
+    var hora;
+    var minuto;
+    var segundo;
     
 
     function nextQuest(){
@@ -119,11 +130,11 @@
                     alternativa02.innerHTML = alternativas.alternativa02[numPergunta];
                     alternativa03.innerHTML = alternativas.alternativa03[numPergunta];
                     alternativa04.innerHTML = alternativas.alternativa04[numPergunta];
-
-                    
-                },1000);
+                },100);
                 
             }
+
+            respostaUser.push(respostaVar);
         
             if(numPergunta == 9){
                 partQuiz.style.display = 'none';
@@ -139,10 +150,8 @@
                     }
                 }
 
-                
+                registrarRespostas();
             }
-
-            respostaUser.push(respostaVar);
         }
         else{
             alert("Insira uma resposta válida!")
@@ -151,7 +160,60 @@
         resposta.value = ``;
 
         resultadoQuiz.innerHTML = `<h1>Parabéns, você acertou ${acertos} questões!!!</h1>`;
+        
+    }
 
+    function registrarRespostas(){
+
+        data = new Date();
+
+        ano = data.getFullYear();
+        mes = data.getMonth();
+        dia = data.getDate();
+        hora = data.getHours();
+        minuto = data.getMinutes();
+        segundo = data.getSeconds();
+
+        dataResp = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`;
+
+
+        // Enviando o valor da nova input
+        fetch("/quiz/registrarRespostas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                acertosServer: acertos,
+                idUserServer: sessionStorage.ID_USUARIO,
+                dataRespServer: dataResp
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                // setTimeout(() => {
+                //     window.location = "login.html";
+                // }, "2000")
+
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
     }
 
 
