@@ -7,8 +7,9 @@ function testar(req, res) {
     res.json("ESTAMOS FUNCIONANDO!");
 }
 
-function listar(req, res) {
-    usuarioModel.listar()
+function selectRespQuiz(req, res) {
+    var idUser = req.body.idUserServer;
+    quizModel.selectRespQuiz(idUser)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
@@ -62,6 +63,6 @@ function registrarRespostas(req, res) {
 
 module.exports = {
     registrarRespostas,
-    listar,
+    selectRespQuiz,
     testar
 }

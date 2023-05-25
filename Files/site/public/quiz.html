@@ -49,10 +49,12 @@
             <div class="resultadoQuiz" id="resultadoQuiz">
             </div>
             <button onclick="window.location.reload(false);" class="btnTryAgain" id="idBtnTryAgain">Tentar Novamente</button>
-
-            
-
         </div>
+
+        <div class="contentResultadosQuiz" id="idMainQuiz">
+            <div id="resultadosQuiz"></div>
+        </div>
+
     </main>
     
 </body>
@@ -114,6 +116,8 @@
     var hora;
     var minuto;
     var segundo;
+
+    selectRespQuiz();
     
 
     function nextQuest(){
@@ -214,6 +218,61 @@
         });
 
         return false;
+    }
+
+    function selectRespQuiz(){
+         fetch("/quiz/selectRespQuiz"
+        //  , {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         idUserServer: sessionStorage.ID_USUARIO
+        //     })
+        ).then(function (resposta){
+            
+      if(resposta.ok){
+        if(resposta.status == 204){
+          var feed = document.getElementById("resultadosQuiz");
+          var mensagem = document.createElement("p");
+          mensagem.innerHTML = "Nenhum resultado encontrado." //SE NÂO APARECER NADA, MUDAR AQUI
+          feed.appendChild(mensagem);
+          throw "Nenhum resultado encontrado!!";
+        }
+
+        resposta.json().then(function (resposta){
+          console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+           var feed = document.getElementById("resultadosQuiz");
+           var main = document.getElementById("idMainQuiz");
+          feed.innerHTML = "";
+          for(let i = 0; i < resposta.length; i++){
+            var publicacao = resposta[i];
+
+            var divResultado = document.createElement("div");
+            var qtdAcertosElement = document.createElement("p");
+            var fkUsuarioElement = document.createElement("p");
+            var dataRespElement = document.createElement("p");
+
+            qtdAcertosElement.innerHTML = `Quantidade de acertos: ${publicacao.qtdAcertos}`;
+            fkUsuarioElement.innerHTML = `Identificação do Usuário: ${publicacao.fkUsuario}`;
+            dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+
+            divResultado.className = "resultadosQuiz";
+
+            main.appendChild(divResultado);
+            divResultado.appendChild(qtdAcertosElement);
+            divResultado.appendChild(fkUsuarioElement);
+            divResultado.appendChild(dataRespElement);
+          }
+        });
+      }else{
+        throw ("Houve um erro na API")
+      }
+    }).catch(function (resposta){
+      console.error(resposta);
+    });
     }
 
 

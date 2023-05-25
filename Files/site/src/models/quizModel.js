@@ -1,9 +1,9 @@
 var database = require("../database/config")
 
-function listar() {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+function selectRespQuiz(idUser) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function selectRespQuiz()", idUser);
     var instrucao = `
-        SELECT * FROM usuario;
+        SELECT * FROM RespostaQuiz WHERE fkUsuario = '${idUser}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -25,5 +25,5 @@ function registrarRespostas(acertos, idUser, dataResp) {
 
 module.exports = {
     registrarRespostas,
-    listar,
+    selectRespQuiz,
 };
