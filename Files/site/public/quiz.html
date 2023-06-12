@@ -44,6 +44,11 @@
                 <input type="number" placeholder="Resposta: 1, 2, 3 ou 4" id="resposta">
 
                 <button onclick="nextQuest()" class="btnProx">Próxima Pergunta</button>
+                <div class="moreButtonsQuiz">
+                    <p><a href="osFilmes.html">< Sair</a></p> |
+                    <p><a href="dashboard/dashboard.html">Comparar Casas ></a></p>
+                </div>
+                
             </div>
 
             <div class="resultadoQuiz" id="resultadoQuiz">
@@ -52,7 +57,11 @@
         </div>
 
         <div class="contentResultadosQuiz" id="idMainQuiz">
+            <div class="tituloSeusResrultados">
+                <h1>Seus Resultados</h1>
+            </div>
             <div id="resultadosQuiz"></div>
+            
         </div>
 
     </main>
@@ -117,7 +126,10 @@
     var minuto;
     var segundo;
 
-    selectRespQuiz();
+    var fkUser = sessionStorage.ID_USUARIO;
+
+    
+        selectRespQuiz(fkUser);
     
 
     function nextQuest(){
@@ -199,9 +211,6 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                cardErro.style.display = "block";
-
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
                 // setTimeout(() => {
                 //     window.location = "login.html";
@@ -220,8 +229,11 @@
         return false;
     }
 
-    function selectRespQuiz(){
-         fetch("/quiz/selectRespQuiz"
+    function selectRespQuiz(fkUser){
+         fetch(`/quiz/selectRespQuiz/${fkUser}`,
+         {
+            cache: "no-store",
+         }
         //  , {
         //     method: "POST",
         //     headers: {
@@ -235,8 +247,10 @@
       if(resposta.ok){
         if(resposta.status == 204){
           var feed = document.getElementById("resultadosQuiz");
+          resultadosQuiz.style.display = 'flex';
+          resultadosQuiz.style.color = '#FFFFFF';
           var mensagem = document.createElement("p");
-          mensagem.innerHTML = "Nenhum resultado encontrado." //SE NÂO APARECER NADA, MUDAR AQUI
+          mensagem.innerHTML = "Você ainda não realizou nenhuma tentativa :)" //SE NÂO APARECER NADA, MUDAR AQUI
           feed.appendChild(mensagem);
           throw "Nenhum resultado encontrado!!";
         }
@@ -256,7 +270,7 @@
             var dataRespElement = document.createElement("p");
 
             qtdAcertosElement.innerHTML = `Quantidade de acertos: ${publicacao.qtdAcertos}`;
-            fkUsuarioElement.innerHTML = `Identificação do Usuário: ${publicacao.fkUsuario}`;
+            fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
             dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
 
             divResultado.className = "resultadosQuiz";

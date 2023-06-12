@@ -7,7 +7,7 @@ body{
     background-attachment: fixed;
     background-size: cover;
     margin: 0;
-    cursor: url(../assets/varinha.png), default;
+    cursor: url(../assets/varinha.cur), default;
 }
 
 /* CABEÇALHO DO SITE */
@@ -201,7 +201,7 @@ code a{
     font-size: 20px;
 }
 
-.part2Cadastro input{
+.part2Cadastro input, .part2Cadastro select{
     width: 80%;
     background-color: rgb(255, 255, 255, 0.7);
     height: 35px;
@@ -216,7 +216,7 @@ code a{
     width: 80%;
 }
 
-.buttonsCad a button{
+.buttonsCad button{
     background-color: transparent;
     border: 1px solid #ffffff;
     color: #ffffff;
@@ -299,7 +299,7 @@ code a{
     width: 100%;
 }
 
-.buttonsLog a button{
+.buttonsLog button{
     background-color: transparent;
     border: 1px solid #ffffff;
     color: #ffffff;
@@ -390,6 +390,10 @@ code a{
     justify-content: space-between;
 }
 
+.linksFilme a{
+    text-decoration: none;
+}
+
 .linksFilme a button{
     background-color: transparent;
     border: 1px solid #ffffff;
@@ -442,6 +446,13 @@ hr{
     color: rgba(255, 255, 255, 0.8);
     transition: transform 1s;
     transform: translateX(0) scale(1.1);
+}
+
+.moreButtonsQuiz{
+    color: rgba(255, 255, 255, 1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 /* FIM DE OS FILMES */
 
@@ -501,22 +512,77 @@ hr{
     margin: auto;
     width: 70%;
     margin-top: 50px;
-    /* animation-duration: 5s;
-  animation-name: slidein; */
 }
 
-/* @keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 100%;
-  }
-
-  to {
-    margin-left: 30%;
+.contentComentario{
+    margin: auto;
     width: 70%;
-  }
-} */
+    margin-top: 50px;
+}
 
+.inputText{
+    background-color: #011221;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 10px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputText label{
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+    font-size: 20px;
+    text-shadow: 1px 1px rgba(0, 0, 0, 1);
+}
+
+.inputText button{
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 20px;
+    height: 40px;
+    width: 120px;
+    font-family: 'Cherry Swash', cursive;
+    padding: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+#iptTxt{
+    width: 300px;
+    max-width: 300px;
+    height: 100px;
+    max-height: 100px;
+    margin-top: 20px;
+    background-color: rgb(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#comentarios{
+    border-style: none;
+    background-color: transparent;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.classComentarios{
+    background-color: #011221;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+    color: rgb(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+    padding: 10px;
+}
 
 .tituloSobreMim{
     width: 100%;
@@ -632,6 +698,12 @@ hr{
     margin-top: 20px;
 }
 
+.partQuiz p a{
+    text-decoration: none;
+    color: rgb(255, 255, 255, 1);
+    font-family: 'Cherry Swash', cursive;
+}
+
 #resultadoQuiz{
     display: none;
 }
@@ -645,13 +717,19 @@ hr{
     width: 70%;
     margin: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     font-family: 'Cherry Swash', cursive;
+}
+
+.tituloSeusResrultados{
+    width: 100%;
 }
 
 .resultadosQuiz{
     color: #FFFFFF;
     width: 40%;
+    min-width: 40%;
     background-color: #011221;
     height: 30%;
     box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.5);

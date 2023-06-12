@@ -7,7 +7,7 @@ router.get("/", function (req, res) {
     usuarioController.testar(req, res);
 });
 
-router.get("/selectRespQuiz", function (req, res){
+router.get("/selectRespQuiz/:fkUser", function (req, res){
     quizController.selectRespQuiz(req, res);
 });
 

@@ -8,8 +8,8 @@ function testar(req, res) {
 }
 
 function selectRespQuiz(req, res) {
-    var idUser = req.body.idUserServer;
-    quizModel.selectRespQuiz(idUser)
+    var fkUser = req.params.fkUser;
+    quizModel.selectRespQuiz(fkUser)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);

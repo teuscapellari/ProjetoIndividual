@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Mim</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/89d28f01ec.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -49,38 +51,37 @@
                 </div>
             </div>
         </div>
+
+        <div class="contentComentario">
+            <div class="inputText">
+                <label for="">Deixe um Comentário :)</label>
+                <textarea type="textarea" name="" id="iptTxt" placeholder="Deixe seu comentário aqui"></textarea>
+                <button onclick="comentar()">Enviar</button>
+            </div>
+            <div id="comentarios" class="classComentarios"></div>
+        </div>
     </main>
 
     <footer id="contatoFooter">
-        <div class="tituloFooter">
+        <div class="tituloFooter">  
             <h1>Encontre-me em</h1>
         </div>
         <div class="contatos">
             <ul>
                 <li>
-                  <i
-                    class="fa-brands fa-square-twitter fa-2xl"
-                    style="color: #ffffff"
-                  ></i
-                  ><a href="">mateuscapellari_</a>
+                    <i class="fa-brands fa-square-instagram fa-2xl" style="color: #ffffff;"></i><a href="https://www.instagram.com/mateuscapellari_/" target="_blank">mateuscapellari_</a>
                 </li>
                 <li>
                     <i class="fa-brands fa-linkedin fa-2xl" style="color: #ffffff"></i
-                    ><a href="">Mateus Capellari</a>
+                    ><a href="https://www.linkedin.com/in/mateus-capellari-3b21b3212/" target="_blank">Mateus Capellari</a>
                   </li>
                 <li>
-                  <i
-                    class="fa-brands fa-square-instagram fa-2xl"
-                    style="color: #ffffff"
-                  ></i
-                  ><a href="">mateus_capellari@hotmail.com</a>
+                    <i class="fa-solid fa-envelope fa-2xl" style="color: #ffffff;"></i>
+                  <a href="mailto:mateus_capellari@hotmail.com?subject=Vim pelo site do projeto individual&body=Conteúdo do email que será preenchido automaticamente">mateus_capellari@hotmail.com</a>
                 </li>
                 <li>
-                  <i
-                    class="fa-brands fa-square-facebook fa-2xl"
-                    style="color: #ffffff"
-                  ></i
-                  ><a href="">Mateus Capellari</a>
+                    <i class="fa-brands fa-github fa-2xl" style="color: #ffffff;"></i>
+                  <a href="https://github.com/MateusCapellari" target="_blank">Mateus Capellari</a>
                 </li>
               </ul>
         </div>
@@ -105,5 +106,117 @@
         contato.style.color = "rgba(255, 255, 255, 0.5)";
 
         idCode.innerHTML = `<code> < ${sessionStorage.NOME_USUARIO} /> </code>`;
+
+    var ano;
+    var mes;
+    var dia;
+    var hora;
+    var minuto;
+    var segundo;
+    var dataComent;
+
+    selectComentario();
+
+        function comentar(){
+
+        data = new Date();
+
+        ano = data.getFullYear();
+        mes = data.getMonth();
+        dia = data.getDate();
+        hora = data.getHours();
+        minuto = data.getMinutes();
+        segundo = data.getSeconds();
+
+        dataComent = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`;
+
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var idUser = sessionStorage.ID_USUARIO;
+        var comentario = iptTxt.value;
+        
+        fetch("/usuarios/comentar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                idUserServer: idUser,
+                comentarioServer: comentario,
+                dataComentServer: dataComent
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                swal({
+                title: "Comentário registrado",
+                text: "Obrigado por comentar :)",
+                icon: "success",
+                timer: 3000,
+                button: false,
+                });
+                selectComentario();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            
+        });
+
+        return false;
+    }
+
+    function selectComentario(){
+         fetch("/usuarios/selectComentario"
+        ).then(function (resposta){
+            
+      if(resposta.ok){
+        if(resposta.status == 204){
+          var feed = document.getElementById("comentarios");
+          var mensagem = document.createElement("p");
+          mensagem.innerHTML = "Ainda não há comentários :) \nSeja o primeiro a comentar" //SE NÂO APARECER NADA, MUDAR AQUI
+          feed.appendChild(mensagem);
+          throw "Nenhum resultado encontrado!!";
+        }
+
+        resposta.json().then(function (resposta){
+          console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+           var feed = document.getElementById("comentarios");
+           var main = document.getElementById("contentComentario");
+          feed.innerHTML = "";
+          for(let i = 0; i < resposta.length; i++){
+            var publicacao = resposta[i];
+
+            var divComentario = document.createElement("div");
+            var nomeComentario = document.createElement("p");
+            var textoComentario = document.createElement("p");
+            var dataRespComentario = document.createElement("p");
+
+            nomeComentario.innerHTML = `<span style="color: rgb(255, 255, 255, 0.5);">Nome do Usuário:</span> ${publicacao.nome}`;
+            textoComentario.innerHTML = `<span style="color: rgb(255, 255, 255, 0.5);">Descrição:</span> ${publicacao.txt}`;
+            dataRespComentario.innerHTML = `<span style="color: rgb(255, 255, 255, 0.5);">Data de publicação:</span> ${publicacao.dataComent}`;
+
+            divComentario.className = "classComentarios";
+
+            feed.appendChild(divComentario);
+            divComentario.appendChild(nomeComentario);
+            divComentario.appendChild(textoComentario);
+            divComentario.appendChild(dataRespComentario);
+          }
+        });
+      }else{
+        throw ("Houve um erro na API")
+      }
+    }).catch(function (resposta){
+      console.error(resposta);
+    });
+    }
 
 </script>

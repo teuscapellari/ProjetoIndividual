@@ -9,7 +9,7 @@
     <title>AquaTech | Dashboards</title>
 
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="dashboards.css">
+    <!-- <link rel="stylesheet" href="dashboards.css"> -->
     <script src="../js/funcoes.js"></script>
     <script src="./alerta.js"></script>
 
@@ -29,100 +29,24 @@
 
 <body>
 
-    <div class="janela">
-        <div class="header-left">
-            <h1>AquaTech</h1>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <code><a href="index.html" id="idCode"> < Mateus Capellari /> </a></code>
             </div>
-
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
-        </div>
-
-        <div class="dash">
-            <div id="alerta">
-            </div>
-
-            <div class="btns-dash">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-                <button class="btn-chart btn-pink" onclick="exibirAquario(1)" id="btnAquario1">Aquario 1</button>
-                <button class="btn-chart btn-white" onclick="exibirAquario(2)" id="btnAquario2">Aquario 2</button>
-                <button class="btn-chart btn-white" onclick="exibirAquario(3)" id="btnAquario3">Aquario 3</button>
-                <button class="btn-chart btn-white" onclick="exibirAquario(4)" id="btnAquario4">Aquario 4</button>
-            </div>
-            <div id="graficos">
-                <div id="grafico1" class="display-block">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario1">123</span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas1"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura1" style="color: white"></p>
-                    </div>
-                </div>
-
-                <div id="grafico2" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario2"></span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas2"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura2" style="color: white"></p>
-                    </div>
-                </div>
-
-                <div id="grafico3" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario3"></span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas3"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura3" style="color: white"></p>
-                    </div>
-                </div>
-
-                <div id="grafico4" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario4"></span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas4"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura4" style="color: white"></p>
-                    </div>
-                </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html" id="inicial">_Inicial</a></li>
+                    <li><a href="osFilmes.html" id="osFilmes">_Os filmes</a></li>
+                    <li><a href="personagensFav.html" id="personagensfav">_Personagens favoritos</a></li>
+                    <li><a href="sobreMim.html" id="sobreMim">_Sobre mim</a></li>
+                    <li><a href="#contatoFooter" id="contatoFooter">_Contato</a></li>
+                </ul>
             </div>
         </div>
-    </div>
+    </header>
+
+
 
 
 </body>
@@ -130,43 +54,78 @@
 </html>
 
 <script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+if(sessionStorage.ID_USUARIO == 0){
+        window.location.href = "index.html"
+    }
+
+        inicial.style.color = "rgba(255, 255, 255, 0.5)";
+        osFilmes.style.color = "#ffffff";
+        personagensfav.style.color = "rgba(255, 255, 255, 0.5)";
+        sobreMim.style.color = "rgba(255, 255, 255, 0.5)";
+        contatoFooter.style.color = "rgba(255, 255, 255, 0.5)";
+
+        idCode.innerHTML = `<code> < ${sessionStorage.NOME_USUARIO} /> </code>`;
+
 
     let proximaAtualizacao;
 
-    window.onload = obterDadosGraficos();
+    window.onload = exibirAquariosDoUsuario();
 
-    function obterDadosGraficos() {
-        obterDadosGrafico(1)
-        obterDadosGrafico(2)
-        obterDadosGrafico(3)
-        obterDadosGrafico(4)
+    function exibirAquariosDoUsuario() {
+        var aquarios = JSON.parse(sessionStorage.AQUARIOS);
+        aquarios.forEach(item => {
+            document.getElementById("btnAquario").innerHTML += `
+            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
+            `
+
+            document.getElementById("graficos").innerHTML += `
+                <div id="grafico${item.id}" class="display-none">
+                    <h3 class="tituloGraficos">
+                        <span id="tituloAquario${item.id}">${item.descricao}</span>
+                    </h3>
+                    <div class="graph">
+                        <canvas id="myChartCanvas${item.id}"></canvas>
+                    </div>
+                    <div class="label-captura">
+                        <p id="avisoCaptura${item.id}" style="color: white"></p>
+                    </div>
+                </div>
+            `
+
+            obterDadosGrafico(item.id)
+        });
+
+        if (aquarios.length > 0) {
+            exibirAquario(aquarios[0].id)
+        }
     }
-
-    verificar_autenticacao();
 
     function alterarTitulo(idAquario) {
         var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>Aquário " + idAquario + "</span>"
+        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
+        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
     }
 
     function exibirAquario(idAquario) {
-        let todosOsGraficos = document.getElementById("graficos")
+        let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
 
-        for (i = 1; i <= todosOsGraficos.childElementCount; i++) {
+        for (i = 0; i < todosOsGraficos.length; i++) {
             // exibindo - ou não - o gráfico
-            let elementoAtual = document.getElementById(`grafico${i}`)
-            if (elementoAtual.classList.contains("display-block")) {
-                elementoAtual.classList.remove("display-block")
-            }
-            elementoAtual.classList.add("display-none")
+            if (todosOsGraficos[i].id != idAquario) {
+                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
+                if (elementoAtual.classList.contains("display-block")) {
+                    elementoAtual.classList.remove("display-block")
+                }
+                elementoAtual.classList.add("display-none")
 
-            // alterando estilo do botão
-            let btnAtual = document.getElementById(`btnAquario${i}`)
-            if (btnAtual.classList.contains("btn-pink")) {
-                btnAtual.classList.remove("btn-pink")
+                // alterando estilo do botão
+                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
+                if (btnAtual.classList.contains("btn-pink")) {
+                    btnAtual.classList.remove("btn-pink")
+                }
+                btnAtual.classList.add("btn-white")
             }
-            btnAtual.classList.add("btn-white")
         }
 
         // exibindo - ou não - o gráfico
@@ -193,12 +152,6 @@
     //     Para ajustar o "select", ajuste o comando sql em src/models
     function obterDadosGrafico(idAquario) {
 
-        alterarTitulo(idAquario)
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
         fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
@@ -206,7 +159,7 @@
                     resposta.reverse();
 
                     plotarGrafico(resposta, idAquario);
-                    
+
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -231,17 +184,31 @@
         let dados = {
             labels: labels,
             datasets: [{
-                label: 'Umidade',
+                label: 'Grifinória',
                 data: [],
                 fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgb(242, 125, 22)',
                 tension: 0.1
             },
             {
-                label: 'Temperatura',
+                label: 'Corvinal',
                 data: [],
                 fill: false,
-                borderColor: 'rgb(199, 52, 52)',
+                borderColor: 'rgb(141, 6, 194)',
+                tension: 0.1
+            },
+            {
+                label: 'Lufa-Lufa',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(252, 223, 3)',
+                tension: 0.1
+            },
+            {
+                label: 'Sonserina',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(20, 130, 51)',
                 tension: 0.1
             }]
         };
@@ -256,6 +223,8 @@
             labels.push(registro.momento_grafico);
             dados.datasets[0].data.push(registro.umidade);
             dados.datasets[1].data.push(registro.temperatura);
+            dados.datasets[2].data.push(registro.umidade);
+            dados.datasets[3].data.push(registro.temperatura);
         }
 
         console.log('----------------------------------------------')
@@ -268,7 +237,7 @@
 
         // Criando estrutura para plotar gráfico - config
         const config = {
-            type: 'line',
+            type: 'polarArea',
             data: dados,
         };
 

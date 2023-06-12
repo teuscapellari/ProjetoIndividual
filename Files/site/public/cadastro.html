@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
@@ -49,13 +50,27 @@
                 <input type="date" placeholder="10/05/2023" id="iptDataNasc">
 
                 <label for="">Qual a sua casa?</label>
-                <input type="text" placeholder="Corvinal" id="iptCasa">
+                <select name="select" id="iptCasa">
+                    <option value="Grifinória">Grifinória</option>
+                    <option value="Corvinal">Corvinal</option>
+                    <option value="Lufa-Lufa">Lufa-Lufa</option>
+                    <option value="Sonserina">Sonserina</option>
+                </select>
 
                 <label for="">Qual seu filme favorito?</label>
-                <input type="text" placeholder="Harry Potter e o Enigma do Príncipe" id="iptFilmeFav">
+                <select name="select" id="iptFilmeFav">
+                    <option value="Harry Potter e a Pedra Filosofal">Harry Potter e a Pedra Filosofal</option>
+                    <option value="Harry Potter e a Câmara Secreta">Harry Potter e a Câmara Secreta</option>
+                    <option value="Harry Potter e o Prisoneiro de Azkabam">Harry Potter e o Prisoneiro de Azkabam</option>
+                    <option value="Harry Potter e o Cálice de Fogo">Harry Potter e o Cálice de Fogo</option>
+                    <option value="Harry Potter e a Ordem da Fénix">Harry Potter e a Ordem da Fénix</option>
+                    <option value="Harry Potter e o enigma do Príncipe">Harry Potter e o enigma do Príncipe</option>
+                    <option value="Harry Potter e as Relíquias da Morte Parte 1">Harry Potter e as Relíquias da Morte Parte 1</option>
+                    <option value="Harry Potter e as Relíquias da Morte Parte 2">Harry Potter e as Relíquias da Morte Parte 2</option>
+                </select>
 
                 <div class="buttonsCad">
-                    <a href="login.html"><button onclick="cadastrar()">Registrar-se</button></a>
+                    <button onclick="cadastrar()">Registrar-se</button>
                     <p><a href="index.html">< Voltar</a></p>
                 </div>
             </div>
@@ -116,22 +131,25 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                cardErro.style.display = "block";
+                swal({
+                title: "Cadastrado(a)",
+                text: "Redirecionando para o Login",
+                icon: "success",
+                timer: 3000,
+                button: false,
+                });
 
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                 setTimeout(() => {
+                    window.location.href = "login.html";
+                 }, "3000")
 
-                // setTimeout(() => {
-                //     window.location = "login.html";
-                // }, "2000")
-
-                // limparFormulario();
-                // finalizarAguardar();
+        
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+            
         });
 
         return false;

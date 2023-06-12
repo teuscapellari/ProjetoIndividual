@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
@@ -40,7 +41,7 @@
                 <p>Ainda não tem cadastro? <a href="cadastro.html">Cadastre-se</a></p>
 
                 <div class="buttonsLog">
-                    <a href="osFilmes.html"><button onclick="entrar()">Logar</button></a>
+                    <button onclick="entrar()">Logar</button>
                     <p><a href="index.html">< Voltar</a></p>
                 </div>
             </div>
@@ -93,10 +94,22 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    swal({
+                    title: "Logado com sucesso",
+                    text: "Eu juro solenemente não fazer nada de bom",
+                    icon:"success",
+                    timer: 3000,
+                    button: false,
+                    });
+
+                    setTimeout(() =>{
+                        window.location.href = "osFilmes.html";
+                    }, 3000);
+                    
 
                     
 
@@ -112,7 +125,6 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 
