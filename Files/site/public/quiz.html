@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Harry Potter</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -27,8 +28,11 @@
     </header>
 
     <div id="modalFormula">
-        TESTE TESTE TESTE
-        <span onclick="mostrarFormula(true)">X</span>
+        <h1>Média de Acertos das casas</h1>
+        <div class="grafico">
+            <canvas id="myChart"></canvas>
+        </div>
+        <span onclick="mostrarFormula(true)" style="cursor: pointer;">Fechar</span>
     </div>
 
     <main class="mainQuiz">
@@ -306,5 +310,144 @@ function mostrarFormula(mostrar){
     });
     }
 
+
+    let proximaAtualizacao;
+
+    window.onload = obterDadosGrafico();
+
+    setInterval(() => {
+        myChart.destroy();
+        obterDadosGrafico();
+    }, 10000)
+
+    // function obterDadosGraficos(){
+    //     obterDadosGrafico(1)
+    // }
+
+    function obterDadosGrafico() {
+
+        fetch(`/medidas/ultimas`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    var myChart = new Chart(
+            document.getElementById(`myChart`),
+            config
+    );
+
+  
+    function plotarGrafico(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+
+        let dados = {
+            labels: ['Grifinória', 'Corvinal', 'Lufa-Lufa', 'Sonserina'],
+            datasets: [{
+                label: 'Grifinória',
+                data: [],
+                fill: true,
+                backgroundColor: ['rgb(242, 125, 22)', 'rgb(141, 6, 194)', 'rgb(252, 223, 3)', 'rgb(20, 130, 51)'],
+                borderColor: ['rgb(242, 125, 22)', 'rgb(141, 6, 194)', 'rgb(252, 223, 3)', 'rgb(20, 130, 51)'],
+            },]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        
+            dados.datasets[0].data.push(resposta[0].Grifinoria);
+            dados.datasets[0].data.push(resposta[0].Corvinal);
+            dados.datasets[0].data.push(resposta[0].LufaLufa);
+            dados.datasets[0].data.push(resposta[0].Sonserina);
+    
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        // console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        myChart = new Chart(
+            document.getElementById(`myChart`),
+            config
+        );
+        myChart.update();
+
+        setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+    }
+
+
+    function atualizarGrafico(dados, myChart) {
+
+
+        idUsuario = 0;
+        fetch(`/medidas/ultimas`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    // obterdados(idUsuario);
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    // let avisoCaptura = document.getElementById(`avisoCaptura${idUsuario}`)
+                    // avisoCaptura.innerHTML = ""
+
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+
+                        myChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
 
 </script>

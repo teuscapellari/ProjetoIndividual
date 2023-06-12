@@ -799,14 +799,19 @@ hr{
     align-self: center;
     left: 325px;
     top: 100px;
+    border-radius: 20px;
+    font-family: 'Cherry Swash', cursive;
 }
-
-
 
 .grafico{
-    width: 50%;
+    width: 100%;
     height: 300px;
 }
+
+#modalFormula span{
+    margin-top: 20px;
+}
+
 /* FIM DO GRAFICO */
 
 
