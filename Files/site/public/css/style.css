@@ -784,6 +784,31 @@ hr{
 }
 /* FIM DO QUIZ */
 
+/* INICIO GRAFICO */
+
+#modalFormula{
+    position: absolute;
+    width: 50%;
+    height: 75%;
+    background-color:rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    align-self: center;
+    left: 325px;
+    top: 100px;
+}
+
+
+
+.grafico{
+    width: 50%;
+    height: 300px;
+}
+/* FIM DO GRAFICO */
+
 
 /* INÍCIO FOOTER */
 footer{
